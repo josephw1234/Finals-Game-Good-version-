@@ -11,3 +11,4 @@ Prerelease - Sept 21 2020:
 
 Prerelease - Oct 13 2020
 - Added second day where you can go to your classes
+- Created new Git Hub repo because an error made me unable to push files anymore

@@ -25,5 +25,6 @@ print("You enter Campbell Colleigate ready to do your finals...")
 t.sleep(1)
 
 # Second day
+print("Type 'map' to see your map and available classes")
 grade = 0
 second.second_day(grade)

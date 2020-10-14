@@ -1,14 +1,16 @@
 from first_day import cheats, knowledge
 import random as random
 import time as t
+from map import print_map
 
 
 classes_done = []
 
 
 def second_day(grade):
-    """ Main function for secod day"""
-    message_1 = ("Which class do you go to?\n>")
+    """ Main function for second day"""
+    message_1 = ("You are in the main hall.\n"
+                 "Which class do you go to?\n>")
     for action in message_1:
         # ending
         if "english" in classes_done and "history" in classes_done \
@@ -16,6 +18,10 @@ def second_day(grade):
             print("You've been to all classes")
             break
         action = input(message_1)
+        # map
+        if action.lower() == "map":
+            print_map()
+            continue
         # English path
         if action.lower() == "english" and "english" not in classes_done:
             print("You go to English in Mrs.Repski's class...")

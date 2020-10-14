@@ -10,5 +10,5 @@ Prerelease - Sept 21 2020:
 - Added inventory
 
 Prerelease - Oct 13 2020
-- Added second day where you can go to your classes
+- Added second day where you can go to your classes and see a map
 - Created new Git Hub repo because an error made me unable to push files anymore

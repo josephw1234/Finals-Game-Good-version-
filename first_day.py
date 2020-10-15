@@ -207,6 +207,8 @@ def first_day(turns_left, bookshelf, desk):
                 break
             # Inventory check path
             if keypress.lower() == "inventory":
+                if items == {}:
+                    print("Your inventory is empty")
                 for item, desc in items.items():
                     print(f"Item: {item}")
                     print(f"\tDescription: {desc['description']}")

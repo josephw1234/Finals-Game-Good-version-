@@ -7,6 +7,8 @@
 import first_day as first
 import second_day as second
 import time as t
+import characters as c
+import map as m
 
 # Intro message
 print("Type 'done' to skip the rest of your turns")

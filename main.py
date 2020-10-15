@@ -11,7 +11,8 @@ import characters as c
 import map as m
 
 # Intro message
-print("Type 'done' to skip the rest of your turns")
+print("Type 'done' to skip the rest of your turns "
+      "and go straight to Campbell")
 print("Type 'inventory' to check your inventory")
 print()
 

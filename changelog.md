@@ -18,3 +18,7 @@ Prerelease - Oct 15 2020
 - Added different levels of strictness to teachers that make cheating easier/harder
 - Added test difficulties that make tests easier or harder (higher or lower grade)
 - Changed grades from being static to having a small ammount of randomness
+
+Prerelease - Oct 16 2020
+- Added map for first day
+- Made it so that maps update if desk/bookshelf is empty or you've been to a class

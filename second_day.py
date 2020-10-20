@@ -20,10 +20,8 @@ def second_day(grade):
             print(f"Your final grade is {grade}%")
             break
         action = input(message_1)
-        # map
-        if action.lower() == "map":
-            m.print_map()
-            continue
+        # map print
+        m.print_map()
         # English path
         if action.lower() == "english" and "english" not in classes_done:
             print("You go to English class...")

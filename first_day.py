@@ -1,12 +1,13 @@
 import time as t
 import random as r
+from tabulate import tabulate
 
 # Lsits and dicts
 knowledge = []
 cheats = []
 items = {}
+map_updates = []
 
-# Message functions
 # Message for look path
 message_1 = ("You look around your room and see your desk and bookshelf\n"
              "Look in one of these or leave? \n>")
@@ -48,6 +49,23 @@ def add_textbook():
                          }
 
 
+def print_map1():
+    """Map function for first day"""
+    # varaibles for desk/bookshelf
+    desk = "Desk"
+    bookshelf = "Bookshelf"
+    # updates for if desk/bookshelf is empty
+    if "bookshelf" in map_updates:
+        bookshelf = "Bookshelf(empty)"
+    if "desk" in map_updates:
+        desk = "Desk(empty)"
+    # print map
+    map = [['', 'Studying Table'],
+           [' ', 'Looking around'],
+           [desk, '', bookshelf]]
+    print(tabulate(map, tablefmt="grid"))
+
+
 # Main function
 # Turns left is how many study/cheat actions the player can take
 # desk and bookshlef should be set to True
@@ -57,6 +75,10 @@ def first_day(turns_left, bookshelf, desk):
                    f"(You have {turns_left} hours left)\n>")
         for keypress in message:
             keypress = input(message)
+            # map
+            if keypress.lower() == "map":
+                print_map1()
+                break
             # Study path
             if keypress.lower() == "study":
                 subject = input(subject_message)
@@ -68,8 +90,10 @@ def first_day(turns_left, bookshelf, desk):
                 if subject.lower() == "english" and "Pencil" in items:
                     n = r.randint(1, 3)
                     if n == 1:
-                        print("Oh no!\nYou were writing so hard that you broke your pencil")
-                        print("You can still study, but it's gonna take some time")
+                        print("Oh no!\nYou were writing so hard that "
+                              "you broke your pencil")
+                        print("You can still study, "
+                              "but it's gonna take some time")
                         turns_left -= 1
                         knowledge.append(subject)
                         print(f"You studied for {subject}")
@@ -84,7 +108,8 @@ def first_day(turns_left, bookshelf, desk):
                     n = r.randint(1, 3)
                     if n == 1:
                         print("Oh no!\nYour calculator ran out of battery")
-                        print("You can still study, but it's gonna take some time")
+                        print("You can still study, but it's "
+                              "gonna take some time")
                         turns_left -= 1
                         knowledge.append(subject)
                         print(f"You studied for {subject}")
@@ -98,7 +123,8 @@ def first_day(turns_left, bookshelf, desk):
                 if subject.lower() == "history" and "Textbook" in items:
                     n = r.randint(1, 3)
                     if n == 1:
-                        print("Oh no!\nThe textbook was so boring you fell asleep while reading")
+                        print("Oh no!\nThe textbook was so boring you "
+                              "fell asleep while reading")
                         print("You can still study, but you wasted some time")
                         turns_left -= 1
                         knowledge.append(subject)
@@ -113,9 +139,10 @@ def first_day(turns_left, bookshelf, desk):
                 if subject.lower() == "french" and "Dictionary" in items:
                     n = r.randint(1, 3)
                     if n == 1:
-                        print("Oh no!\nYour cat is apparantly racist towards french people"
-                              " and decided to rip apart your dictionary")
-                        print("You can still study, but it's gonna take some time")
+                        print("Oh no!\nYour cat got a little hungry and "
+                              "decided to rip apart your dictionary")
+                        print("You can still study, but it's gonna "
+                              "take some time")
                         turns_left -= 1
                         knowledge.append(subject)
                         print(f"You studied for {subject}")
@@ -127,22 +154,26 @@ def first_day(turns_left, bookshelf, desk):
                         print(f"You studied for {subject}")
                         break
                 # no items paths
-                if subject.lower() == "english" and "Pencil"  not in items:
+                if subject.lower() == "english" and "Pencil" not in items:
                     turns_left -= 1
                     knowledge.append(subject)
                     print(f"You studied for {subject}")
+                    break
                 if subject.lower() == "math" and "Calculator" not in items:
                     turns_left -= 1
                     knowledge.append(subject)
                     print(f"You studied for {subject}")
+                    break
                 if subject.lower() == "history" and "Textbook" not in items:
                     turns_left -= 1
                     knowledge.append(subject)
                     print(f"You studied for {subject}")
+                    break
                 if subject.lower() == "french" and "Dictionary" not in items:
                     turns_left -= 1
                     knowledge.append(subject)
                     print(f"You studied for {subject}")
+                    break
                 # unknown input
                 else:
                     print("That isn't a subject")
@@ -155,7 +186,8 @@ def first_day(turns_left, bookshelf, desk):
                     break
                 if subject.lower() == "english" or \
                    subject.lower() == "french"\
-                   or subject.lower() == "history" or subject.lower() == "math":
+                   or subject.lower() == "history" or \
+                   subject.lower() == "math":
                         cheats.append(subject)
                         turns_left -= 1
                         print(f"You cheated for {subject}")
@@ -178,6 +210,7 @@ def first_day(turns_left, bookshelf, desk):
                                 add_dictionary()
                                 add_textbook()
                                 bookshelf = False
+                                map_updates.append("bookshelf")
                                 continue
                             if item.lower() == "no":
                                 continue
@@ -193,6 +226,7 @@ def first_day(turns_left, bookshelf, desk):
                                 add_pencil()
                                 add_calculator()
                                 desk = False
+                                map_updates.append("desk")
                                 continue
                             if item.lower() == "no":
                                 continue

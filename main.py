@@ -22,7 +22,7 @@ print("You can chose how to prepare either by studying like a"
       " it's gonna cost you big time.\n")
 t.sleep(1)
 print("Here's a general idea of what your room looks like:")
-m.print_map1()
+first.print_map1()
 t.sleep(1)
 print("\nIf you look hard enough, you might be able to find something "
       " useful around here...")

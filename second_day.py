@@ -149,6 +149,8 @@ def second_day(grade):
             if grade < 50:
                 bad_ending()
                 break
+            if grade < 80:
+                good_ending()
             break
         # map print
         t.sleep(1)

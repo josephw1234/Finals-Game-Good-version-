@@ -41,3 +41,6 @@ Beta - Oct 27 2020
 
 V 1.0 - Oct 27 2020
 - Released the game
+
+V 1.1 - Oct 27 2020
+- Fixed good ending

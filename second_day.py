@@ -170,7 +170,7 @@ def second_day(grade):
             for action in message:
                 action = input(message)
                 # knowledge path
-                if action == "k" and 'englsih' not in knowledge:
+                if action == "k" and 'english' not in knowledge:
                     print("\nYou didn't study for english")
                     continue
                     g = random.randint(18, 22)

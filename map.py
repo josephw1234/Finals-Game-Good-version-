@@ -35,7 +35,7 @@ class Map:
         self.test_difficulty = test_difficulty
 
     def __str__(self):
-        desc = (f"{self.teacher} is the teacher\nThe test difficulty is "          
+        desc = (f"{self.teacher} is the teacher\nThe test difficulty is "
                 f"{self.test_difficulty}")
         return desc
 

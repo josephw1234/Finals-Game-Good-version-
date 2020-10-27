@@ -1,26 +1,30 @@
-import time as t
 import random as r
 from tabulate import tabulate
 
-# Lsits and dicts
+# Lists of things you've cheated/studied
 knowledge = []
 cheats = []
+
+# inventory
 items = {}
+
+# list for map updates
 map_updates = []
 
+# lists of what classes you can cheat/study for
+knowledge_subjects = ["Math", "French", "History", "English"]
+cheat_subjects = ["Math", "French", "History", "English"]
+
 # Message for look path
-message_1 = ("You look around your room and see your desk and bookshelf\n"
+message_1 = ("\nYou look around your room and see your desk and bookshelf\n"
              "Look in one of these or leave? \n>")
 
 # Message for bookshelf path
-message_2 = ("You see a French English dictionary and a History textbook,\n"
+message_2 = ("\nYou see a French English dictionary and a History textbook,\n"
              "these might help you, take them?\n>")
 
 # Message for desk path
-message_3 = ("You see a calculator and a pencil, take them?\n>")
-
-# Message for cheat/study path
-subject_message = ("What sublect? (English, french, Math, history)\n>")
+message_3 = ("\nYou see a calculator and a pencil, take them?\n>")
 
 
 # Functions for adding items
@@ -66,12 +70,12 @@ def print_map1():
     print(tabulate(map, tablefmt="grid"))
 
 
-# Main function
-# Turns left is how many study/cheat actions the player can take
-# desk and bookshlef should be set to True
 def first_day(turns_left, bookshelf, desk):
+    """Main function for first day, urns left is how many
+       study/cheat actions the player can take, desk and bookshelf
+       should be set to True"""
     while turns_left > 0:
-        message = (f"Cheat, study or look around?\n"
+        message = (f"\nCheat, study or look around?\n"
                    f"(You have {turns_left} hours left)\n>")
         for keypress in message:
             keypress = input(message)
@@ -81,119 +85,135 @@ def first_day(turns_left, bookshelf, desk):
                 break
             # Study path
             if keypress.lower() == "study":
-                subject = input(subject_message)
+                subject = input(f"\nWhat sublect? "
+                                f"({', '.join(knowledge_subjects)})\n>")
                 # already done
                 if subject.lower() in knowledge:
-                    print(f"You've already studied for {subject}")
+                    print(f"\nYou've already studied for {subject}")
                     continue
                 # items paths
                 if subject.lower() == "english" and "Pencil" in items:
                     n = r.randint(1, 3)
                     if n == 1:
-                        print("Oh no!\nYou were writing so hard that "
+                        print("\nOh no!\nYou were writing so hard that "
                               "you broke your pencil")
-                        print("You can still study, "
+                        print("\nYou can still study, "
                               "but it's gonna take some time")
                         turns_left -= 1
                         knowledge.append(subject)
-                        print(f"You studied for {subject}")
+                        knowledge_subjects.remove(subject.title())
+                        print(f"\nYou studied for {subject}")
                         break
                     if n >= 2:
-                        print("With your pencil, studying for english"
+                        print("\nWith your pencil, studying for english"
                               " barely takes any time at all...")
                         knowledge.append(subject)
-                        print(f"You studied for {subject}")
+                        knowledge_subjects.remove(subject.title())
+                        print(f"\nYou studied for {subject}")
                         break
                 if subject.lower() == "math" and "Calculator" in items:
                     n = r.randint(1, 3)
                     if n == 1:
-                        print("Oh no!\nYour calculator ran out of battery")
-                        print("You can still study, but it's "
+                        print("\nOh no!\nYour calculator ran out of battery")
+                        print("\nYou can still study, but it's "
                               "gonna take some time")
                         turns_left -= 1
                         knowledge.append(subject)
-                        print(f"You studied for {subject}")
+                        knowledge_subjects.remove(subject.title())
+                        print(f"\nYou studied for {subject}")
                         break
                     if n >= 2:
-                        print("With your calculator, studying for math"
+                        print("\nWith your calculator, studying for math"
                               " barely takes any time at all...")
                         knowledge.append(subject)
-                        print(f"You studied for {subject}")
+                        knowledge_subjects.remove(subject.title())
+                        print(f"\nYou studied for {subject}")
                         break
                 if subject.lower() == "history" and "Textbook" in items:
                     n = r.randint(1, 3)
                     if n == 1:
-                        print("Oh no!\nThe textbook was so boring you "
+                        print("\nOh no!\nThe textbook was so boring you "
                               "fell asleep while reading")
-                        print("You can still study, but you wasted some time")
+                        print("\nYou can still study, "
+                              "but you wasted some time")
                         turns_left -= 1
                         knowledge.append(subject)
-                        print(f"You studied for {subject}")
+                        knowledge_subjects.remove(subject.title())
+                        print(f"\nYou studied for {subject}")
                         break
                     if n >= 2:
-                        print("With your textbook, studying for history"
+                        print("\nWith your textbook, studying for history"
                               " barely takes any time at all...")
                         knowledge.append(subject)
-                        print(f"You studied for {subject}")
+                        knowledge_subjects.remove(subject.title())
+                        print(f"\nYou studied for {subject}")
                         break
                 if subject.lower() == "french" and "Dictionary" in items:
                     n = r.randint(1, 3)
                     if n == 1:
-                        print("Oh no!\nYour cat got a little hungry and "
+                        print("\nOh no!\nYour cat got a little hungry and "
                               "decided to rip apart your dictionary")
-                        print("You can still study, but it's gonna "
+                        print("\nYou can still study, but it's gonna "
                               "take some time")
                         turns_left -= 1
                         knowledge.append(subject)
-                        print(f"You studied for {subject}")
+                        knowledge_subjects.remove(subject.title())
+                        print(f"\nYou studied for {subject}")
                         break
                     if n >= 2:
-                        print("With your dictionary, studying for french"
+                        print("\nWith your dictionary, studying for french"
                               " barely takes any time at all...")
                         knowledge.append(subject)
-                        print(f"You studied for {subject}")
+                        knowledge_subjects.remove(subject.title())
+                        print(f"\nYou studied for {subject}")
                         break
                 # no items paths
                 if subject.lower() == "english" and "Pencil" not in items:
                     turns_left -= 1
                     knowledge.append(subject)
-                    print(f"You studied for {subject}")
+                    knowledge_subjects.remove(subject.title())
+                    print(f"\nYou studied for {subject}")
                     break
                 if subject.lower() == "math" and "Calculator" not in items:
+                    knowledge_subjects.remove(subject.title())
                     turns_left -= 1
                     knowledge.append(subject)
-                    print(f"You studied for {subject}")
+                    print(f"\nYou studied for {subject}")
                     break
                 if subject.lower() == "history" and "Textbook" not in items:
                     turns_left -= 1
                     knowledge.append(subject)
-                    print(f"You studied for {subject}")
+                    knowledge_subjects.remove(subject.title())
+                    print(f"\nYou studied for {subject}")
                     break
                 if subject.lower() == "french" and "Dictionary" not in items:
                     turns_left -= 1
                     knowledge.append(subject)
-                    print(f"You studied for {subject}")
+                    knowledge_subjects.remove(subject.title())
+                    print(f"\nYou studied for {subject}")
                     break
                 # unknown input
                 else:
-                    print("That isn't a subject")
+                    print("\nThat isn't a subject")
                     continue
             # Cheat path
             if keypress.lower() == "cheat":
-                subject = input(subject_message)
+                subject = input(f"\nWhat sublect? "
+                                f"({', '.join(cheat_subjects)})\n>")
                 if subject.lower() in cheats:
-                    print(f"You've already cheated on {subject}")
+                    print(f"\nYou've already cheated on {subject}")
                     break
                 if subject.lower() == "english" or \
                    subject.lower() == "french"\
                    or subject.lower() == "history" or \
                    subject.lower() == "math":
+                        cheat_subjects.remove(subject.title())
                         cheats.append(subject)
                         turns_left -= 1
-                        print(f"You cheated for {subject}")
+                        print(f"\nYou cheated for {subject}")
                         break
                 else:
-                    print("That isn't a subject")
+                    print("\nThat isn't a subject")
                     continue
             # Look path
             if keypress.lower() == "look":
@@ -201,7 +221,7 @@ def first_day(turns_left, bookshelf, desk):
                 while active == True:
                     action = input(message_1)
                     if action == "look":
-                        choice = input("Desk or bookshelf\n>")
+                        choice = input("\nDesk or bookshelf\n>")
                         # Bookshelf path
                         if choice.lower() == "bookshelf" and \
                            bookshelf == True:
@@ -216,7 +236,7 @@ def first_day(turns_left, bookshelf, desk):
                                 continue
                         if choice.lower() == "bookshelf" and \
                            bookshelf == False:
-                            print("You've already looked in there")
+                            print("\nYou've already looked in there")
                             continue
                         # Desk path
                         if choice.lower() == "desk" and \
@@ -232,18 +252,22 @@ def first_day(turns_left, bookshelf, desk):
                                 continue
                         if choice.lower() == "desk" and \
                            desk == False:
-                            print("You've already looked there")
+                            print("\nYou've already looked there")
+                            continue
                     # Leave path
                     if action.lower() == "leave":
                         turns_left -= 1
                         active = False
                         break
+                    else:
+                        print("\nI don't know what you mean")
                 break
             # Inventory check path
             if keypress.lower() == "inventory":
                 if items == {}:
-                    print("Your inventory is empty")
+                    print("\nYour inventory is empty")
                 for item, desc in items.items():
+                    print()
                     print(f"Item: {item}")
                     print(f"\tDescription: {desc['description']}")
                     print(f"\tHelps with: {desc['helps with']}")
@@ -255,5 +279,5 @@ def first_day(turns_left, bookshelf, desk):
                 break
             # Unknown input
             else:
-                print("I don't know what you mean")
+                print("\nI don't know what you mean")
                 continue
